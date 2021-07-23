@@ -5,8 +5,9 @@ from string import punctuation
 
 __all__ = ['path_traveller']
 
-def _walk(path: str, search_name: str=None, absolute_key: bool=False, 
-          absolute_value: bool=True, output_dict: bool=True):
+
+def _walk(path: str, search_name: str = None, absolute_key: bool = False,
+          absolute_value: bool = True, output_dict: bool = True):
     """
     Function for walking to every path and return its hierarchy in dictionary
     or list.
@@ -16,19 +17,19 @@ def _walk(path: str, search_name: str=None, absolute_key: bool=False,
     path : str
         Used to walk through every file in folders and its sub folders.
     search_name : str, optional
-        Used to locate any file with its name (ex. search_name = 'main.py') 
-        within all the folders and its sub folders from the path location. 
+        Used to locate any file with its name (ex. search_name = 'main.py')
+        within all the folders and its sub folders from the path location.
         Otherwise assign None if file not found.
         The default is None and is used to locate all files.
     absolute_key: bool, optional
-        This field specify whether we want absolute path of parent dir path in 
+        This field specify whether we want absolute path of parent dir path in
         the final result.
     absolute_value: bool, optional
-        This field specify whether we want absolute path of child dir path in 
+        This field specify whether we want absolute path of child dir path in
         the finalresult.
     output_dict: bool, optional
         This field specify whether we want dictionary output or list output.
-        
+
     Returns
     -------
     list or dict
@@ -38,7 +39,7 @@ def _walk(path: str, search_name: str=None, absolute_key: bool=False,
 
     """
     BASE_PATH = pathlib.PosixPath(path)
-    path_dict=defaultdict(list)
+    path_dict = defaultdict(list)
     path_list = []
     if BASE_PATH.is_file():
         if search_name:
@@ -51,8 +52,8 @@ def _walk(path: str, search_name: str=None, absolute_key: bool=False,
     elif BASE_PATH.is_dir():
         ls = list(BASE_PATH.iterdir())
         for path_item in ls:
-            file_path = _walk(path_item, search_name, 
-                              absolute_key=absolute_key, 
+            file_path = _walk(path_item, search_name,
+                              absolute_key=absolute_key,
                               absolute_value=absolute_value,
                               output_dict=output_dict)
             key = path_item.parent
@@ -97,7 +98,7 @@ def find_available_path(from_list: list):
     return available_item_list
 
 
-def walk(path: str, search_name: str=None):
+def walk(path: str, search_name: str = None):
     """
     Function for walking to every path and return its hierarchy in dictionary
     or list.
@@ -107,11 +108,11 @@ def walk(path: str, search_name: str=None):
     path : str
         Used to walk through every file in folders and its sub folders.
     search_name : str, optional
-        Used to locate any file with its name (ex. search_name = 'main.py') 
-        within all the folders and its sub folders from the path location. 
+        Used to locate any file with its name (ex. search_name = 'main.py')
+        within all the folders and its sub folders from the path location.
         Otherwise assign None if file not found.
         The default is None and is used to locate all files.
-    
+
     Returns
     -------
     list or dict
@@ -120,7 +121,7 @@ def walk(path: str, search_name: str=None):
         all subdirectories.
     """
     BASE_PATH = pathlib.PosixPath(path)
-    path_dict=defaultdict(list)
+    path_dict = defaultdict(list)
     if BASE_PATH.is_file():
         if search_name:
             if BASE_PATH.name == search_name:
@@ -134,7 +135,7 @@ def walk(path: str, search_name: str=None):
         for path_item in ls:
             file_path = walk(path_item, search_name)
             if file_path == {}:
-                file_path = {path_item.name:[]}
+                file_path = {path_item.name: []}
             parent = path_item.parent
             if isinstance(file_path, pathlib.PosixPath):
                 file_path = file_path.absolute().as_posix()
@@ -142,7 +143,7 @@ def walk(path: str, search_name: str=None):
     return dict(path_dict)
 
 
-def validate_identifier(identifier:str):
+def validate_identifier(identifier: str):
     """
     This function is used to validate variable identifier for namedtuple
     object.
@@ -156,7 +157,7 @@ def validate_identifier(identifier:str):
     -------
     identifier : str
         Valid variable name in the form of string. Validation is done by
-        replacing all punctuation charachters by '_' and putting 'prefix' 
+        replacing all punctuation charachters by '_' and putting 'prefix'
         string if any variable starts with any punctuation character.
     """
     identifier = pathlib.PosixPath(identifier)
@@ -169,7 +170,7 @@ def validate_identifier(identifier:str):
             else:
                 identifier = identifier.replace(symbol, '_')
     if identifier and identifier[0].isnumeric():
-        identifier = 'numeric_'+identifier
+        identifier = 'numeric_' + identifier
     return identifier
 
 
@@ -192,7 +193,7 @@ def dict2obj(d: dict):
     # instance of class list
     if isinstance(d, list):
         FilesAndFolders = namedtuple("FilesAndFolders",
-                                    """
+                                     """
                                     files
                                     folders
                                     """)
@@ -204,19 +205,23 @@ def dict2obj(d: dict):
                 my_file_list.append(item)
             else:
                 my_folder_list.append(item)
-                
+
         named_tuple = FilesAndFolders(files=my_file_list,
-                       folders=my_folder_list)
+                                      folders=my_folder_list)
         return named_tuple
     # if d is not a instance of dict then
     # directly object is returned
     if not isinstance(d, dict):
         return d
     # declaring a class
+
     class C:
         def __repr__(self):
-            folder_or_file_name = list(self.__dict__.keys()) and list(self.__dict__.keys())[0]
-            folder_or_file_name = validate_identifier(identifier=folder_or_file_name)
+            folder_or_file_name = list(
+                self.__dict__.keys()) and list(
+                self.__dict__.keys())[0]
+            folder_or_file_name = validate_identifier(
+                identifier=folder_or_file_name)
             return folder_or_file_name
     # constructor of the class passed to obj
     obj = C()
@@ -225,13 +230,13 @@ def dict2obj(d: dict):
         k = validate_identifier(identifier=k)
         obj.__dict__[k] = v
     return obj
-  
 
-def obj2namedtuple(path_traveller:dict2obj):
+
+def obj2namedtuple(path_traveller: dict2obj):
     """
-    Function which can convert the object returned from dict2obj into the 
+    Function which can convert the object returned from dict2obj into the
     namedtuple object
-    
+
     Parameters
     ----------
     path_traveller : dict2obj
@@ -240,7 +245,7 @@ def obj2namedtuple(path_traveller:dict2obj):
     Returns
     -------
     named_tuple : namedtuple
-        namedtuple object which is dynamically created using path name 
+        namedtuple object which is dynamically created using path name
         given by ls.files and ls.folder namedtuple used in dict2obj
 
     """
@@ -248,38 +253,41 @@ def obj2namedtuple(path_traveller:dict2obj):
         path_traveller._asdict()
     except AttributeError:
         # print("Converting object into namedtuple if present in the object")
-        path_traveller = path_traveller.__dict__[list(path_traveller.__dict__.keys())[0]]
+        path_traveller = path_traveller.__dict__[
+            list(path_traveller.__dict__.keys())[0]]
         # print("Converted")
-    
+
     to_dict = path_traveller._asdict()
     as_dict = {}
-    for key in path_traveller._fields: # ('files', 'folders')
+    for key in path_traveller._fields:  # ('files', 'folders')
         if key == 'folders':
             for every_folder in to_dict[key]:
-                every_folder_object = every_folder.__dict__[list(every_folder.__dict__.keys())[0]]
-                as_dict[validate_identifier(str(every_folder))] = obj2namedtuple(every_folder_object)                
+                every_folder_object = every_folder.__dict__[
+                    list(every_folder.__dict__.keys())[0]]
+            as_dict[validate_identifier(str(every_folder))] = obj2namedtuple(
+                    every_folder_object)
         elif key == 'files':
             for every_file in to_dict[key]:
-                as_dict[validate_identifier(every_file)]=every_file
+                as_dict[validate_identifier(every_file)] = every_file
     NamedTuple = namedtuple("NamedTuple", sorted(as_dict))
     named_tuple = NamedTuple(**as_dict)
     return named_tuple
 
 
-def path_traveller(root_path:str=None, find:str=None):
+def path_traveller(root_path: str = None, find: str = None):
     """
-    Function which helps to travel the path from namedtuple. A function that 
-    helps to find out some files in the path hierarchy starting from 
+    Function which helps to travel the path from namedtuple. A function that
+    helps to find out some files in the path hierarchy starting from
     the root path.
 
     Parameters
     ----------
     root_path : str, optional
         Any path from which you want to start travelling. If None is given then
-        the root directory of this module will act as root path. 
+        the root directory of this module will act as root path.
         The default is None.
     find : str, optional
-        Any file name which you want to identify no matter whether is it 
+        Find any file name which you want to identify no matter whether is it
         present in any of the subdirectories. If None is given all find will be
         searching. The default is None.
 
@@ -290,8 +298,8 @@ def path_traveller(root_path:str=None, find:str=None):
         absolute paths, relative paths and a namedtuple object for travelling.
 
     """
-    
-    PathTraveller = namedtuple("PathTraveller", 
+
+    PathTraveller = namedtuple("PathTraveller",
                                """
                                root_path
                                cwd
@@ -300,6 +308,9 @@ def path_traveller(root_path:str=None, find:str=None):
                                travel
                                """)
     # Set appropriate path locations
+    root_path = root_path and pathlib.PosixPath(
+        root_path).absolute().as_posix()
+
     if root_path is None:
         try:
             location = pathlib.Path(__file__).parent
@@ -308,12 +319,11 @@ def path_traveller(root_path:str=None, find:str=None):
     else:
         location = pathlib.Path(root_path)
         if not location.is_dir() and location.is_file():
-            location  = location.parent
-    try:
-        original_location = pathlib.PosixPath(root_path).parent.absolute().as_posix()
-    except TypeError:
-        original_location = pathlib.PosixPath(__file__).parent.absolute().as_posix()
-        
+            location = location.parent
+
+    original_location = pathlib.PosixPath(
+        __file__).parent.absolute().as_posix()
+
     try:
         pathlib.os.chdir(location)
     except FileNotFoundError:
@@ -321,36 +331,38 @@ def path_traveller(root_path:str=None, find:str=None):
     except TypeError:
         return "Please enter valid string path"
 
-    # Finding absolute path                  
-    absolute_paths = _walk(location.as_posix(), absolute_key=False, 
-                          absolute_value=True, search_name=find, 
-                          output_dict=False)
-    absolute_paths = find_available_path(from_list=absolute_paths)
-    
     # Finding relative paths
     location = pathlib.PosixPath('.')
-    relative_paths = _walk(location.as_posix(), absolute_key=False, 
-                          absolute_value=False, search_name=find, 
-                          output_dict=False)
+
+    # Finding absolute path
+    absolute_paths = _walk(location.as_posix(), absolute_key=False,
+                           absolute_value=True, search_name=find,
+                           output_dict=False)
+    absolute_paths = find_available_path(from_list=absolute_paths)
+
+    relative_paths = _walk(location.as_posix(), absolute_key=False,
+                           absolute_value=False, search_name=find,
+                           output_dict=False)
     relative_paths = find_available_path(from_list=relative_paths)
-    
+
     # Travel to every path and create dictionary
     my_dict = walk(location.as_posix())
-    
+
     # Convert dictionary to object
     obj = dict2obj(my_dict)
 
     # Convert object to namedtuple
     travel = obj2namedtuple(obj)
-    
+
     # Namedtuple object
     traveller = PathTraveller(root_path=root_path,
                               cwd=location.absolute().as_posix(),
                               absolute_paths=absolute_paths,
-                              relative_paths=relative_paths, 
+                              relative_paths=relative_paths,
                               travel=travel)
     pathlib.os.chdir(original_location)
     return traveller
+
 
 if __name__ == '__main__':
     root_path = None
