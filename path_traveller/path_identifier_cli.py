@@ -153,11 +153,13 @@ def main(root_path=None, find=None, show_absolute_paths=False,
         click.echo("\nPlease enter the correct root path. You can use . for \
 current directory\n")
         return main()
-    try:
-        journey = path_traveller(root_path=root_path, find=find)
-    except (SyntaxError, TypeError, NameError):
-        click.echo("Please enter the valid arguments\n")
-        return main()
+    print(root_path, find)
+    # try:
+    journey = path_traveller(root_path=root_path, find=find)
+
+    # except (SyntaxError, TypeError, NameError):
+    #     click.echo("Please enter the valid arguments\n")
+    #     return main()
     if show_examples:
         examples()
     if show_absolute_paths:

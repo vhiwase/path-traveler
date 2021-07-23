@@ -162,6 +162,7 @@ def validate_identifier(identifier: str):
     """
     identifier = pathlib.PosixPath(identifier)
     identifier = identifier.name
+    identifier = identifier.replace(' ', '_')
     for symbol in punctuation:
         if symbol in identifier:
             if identifier.startswith(symbol):
@@ -264,7 +265,8 @@ def obj2namedtuple(path_traveller: dict2obj):
             for every_folder in to_dict[key]:
                 every_folder_object = every_folder.__dict__[
                     list(every_folder.__dict__.keys())[0]]
-            as_dict[validate_identifier(str(every_folder))] = obj2namedtuple(
+                as_dict[validate_identifier(
+                    str(every_folder))] = obj2namedtuple(
                     every_folder_object)
         elif key == 'files':
             for every_file in to_dict[key]:
