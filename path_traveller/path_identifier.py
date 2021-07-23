@@ -8,7 +8,8 @@ __all__ = ['path_traveller']
 def _walk(path: str, search_name: str=None, absolute_key: bool=False, 
           absolute_value: bool=True, output_dict: bool=True):
     """
-    Function for walking to every path and return its hierarchy in dictionary.
+    Function for walking to every path and return its hierarchy in dictionary
+    or list.
 
     Parameters
     ----------
@@ -98,7 +99,8 @@ def find_available_path(from_list: list):
 
 def walk(path: str, search_name: str=None):
     """
-    Function for walking to every path and return its hierarchy in dictionary.
+    Function for walking to every path and return its hierarchy in dictionary
+    or list.
 
     Parameters
     ----------
@@ -109,15 +111,13 @@ def walk(path: str, search_name: str=None):
         within all the folders and its sub folders from the path location. 
         Otherwise assign None if file not found.
         The default is None and is used to locate all files.
-    is_absolute: bool, optional
-        This field specify whether we want absolute parent dir path in the 
-        fianl result.
-
+    
     Returns
     -------
-    dict
-        dictionary with key as a file number or folder number and value 
-        representing file path if present.
+    list or dict
+        dictionary with key as parent path and value as file or folder path
+        list which list down all the files available in current directory and
+        all subdirectories.
     """
     BASE_PATH = pathlib.PosixPath(path)
     path_dict=defaultdict(list)
@@ -137,7 +137,7 @@ def walk(path: str, search_name: str=None):
                 file_path = {path_item.name:[]}
             parent = path_item.parent
             if isinstance(file_path, pathlib.PosixPath):
-                file_path = file_path.name
+                file_path = file_path.absolute().as_posix()
             path_dict[parent.absolute().name].append(file_path)
     return dict(path_dict)
 
@@ -159,11 +159,13 @@ def validate_identifier(identifier:str):
         replacing all punctuation charachters by '_' and putting 'prefix' 
         string if any variable starts with any punctuation character.
     """
+    identifier = pathlib.PosixPath(identifier)
+    identifier = identifier.name
     for symbol in punctuation:
         if symbol in identifier:
             if identifier.startswith(symbol):
                 identifier = identifier.replace(symbol, '_')
-                identifier = 'prefix_' + identifier
+                identifier = 'prefix' + identifier
             else:
                 identifier = identifier.replace(symbol, '_')
     if identifier and identifier[0].isnumeric():
@@ -308,6 +310,11 @@ def path_traveller(root_path:str=None, find:str=None):
         if not location.is_dir() and location.is_file():
             location  = location.parent
     try:
+        original_location = pathlib.PosixPath(root_path).parent.absolute().as_posix()
+    except TypeError:
+        original_location = pathlib.PosixPath(__file__).parent.absolute().as_posix()
+        
+    try:
         pathlib.os.chdir(location)
     except FileNotFoundError:
         return "Please enter Valid Path"
@@ -342,14 +349,15 @@ def path_traveller(root_path:str=None, find:str=None):
                               absolute_paths=absolute_paths,
                               relative_paths=relative_paths, 
                               travel=travel)
+    pathlib.os.chdir(original_location)
     return traveller
 
 if __name__ == '__main__':
     root_path = None
     find = 'spec.json'
-    traveller = path_traveller(root_path=root_path, find=find)
-    root_path = traveller.root_path
-    current_working_directory = traveller.cwd
-    absolute_paths = traveller.absolute_paths
-    relative_paths = traveller.relative_paths
-    named_tuple_object_for_travelling = traveller.travel
+    journey = path_traveller(root_path=root_path, find=find)
+    root_path = journey.root_path
+    current_working_directory = journey.cwd
+    absolute_paths = journey.absolute_paths
+    relative_paths = journey.relative_paths
+    traveller = journey.travel
