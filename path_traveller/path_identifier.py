@@ -3,7 +3,7 @@ from collections import defaultdict
 from collections import namedtuple
 from string import punctuation
 
-__all__ = ['path_traveller']
+__all__ = ['travelling']
 
 
 def _walk(path: str, search_name: str = None, absolute_key: bool = False,
@@ -276,7 +276,7 @@ def obj2namedtuple(path_traveller: dict2obj):
     return named_tuple
 
 
-def path_traveller(root_path: str = None, find: str = None):
+def travelling(root_path: str = None, find: str = None):
     """
     Function which helps to travel the path from namedtuple. A function that
     helps to find out some files in the path hierarchy starting from
@@ -289,9 +289,8 @@ def path_traveller(root_path: str = None, find: str = None):
         the root directory of this module will act as root path.
         The default is None.
     find : str, optional
-        Find any file name which you want to identify no matter whether is it
-        present in any of the subdirectories. If None is given all find will be
-        searching. The default is None.
+        Find any file from root directory and all of its children directories. 
+        If None is given all find will be searching. The default is None.
 
     Returns
     -------
@@ -329,9 +328,9 @@ def path_traveller(root_path: str = None, find: str = None):
     try:
         pathlib.os.chdir(location)
     except FileNotFoundError:
-        return "Please enter Valid Path"
+        raise FileNotFoundError
     except TypeError:
-        return "Please enter valid string path"
+        raise TypeError
 
     # Finding relative paths
     location = pathlib.PosixPath('.')
@@ -369,7 +368,7 @@ def path_traveller(root_path: str = None, find: str = None):
 if __name__ == '__main__':
     root_path = None
     find = 'spec.json'
-    journey = path_traveller(root_path=root_path, find=find)
+    journey = travelling(root_path=root_path, find=find)
     root_path = journey.root_path
     current_working_directory = journey.cwd
     absolute_paths = journey.absolute_paths

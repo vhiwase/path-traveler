@@ -1,7 +1,7 @@
 try:
-    from .path_identifier import path_traveller
+    from .path_identifier import travelling
 except ImportError:
-    from path_identifier import path_traveller
+    from path_identifier import travelling
 
 import click
 import pathlib
@@ -18,7 +18,7 @@ def examples():
     """
     root_path = None
     find = None
-    journey = path_traveller(root_path=root_path, find=find)
+    journey = travelling(root_path=root_path, find=find)
     root_path = journey.root_path
     current_working_directory = journey.cwd
     print("""Input parameters:
@@ -46,7 +46,7 @@ def examples():
     find = 'spec.json'
     print("Identifying '{}' file".format(find))
     print("""{}""".format("-" * 28))
-    journey = path_traveller(root_path=root_path, find=find)
+    journey = travelling(root_path=root_path, find=find)
     root_path = journey.root_path
     current_working_directory = journey.cwd
     print("""Input parameters:
@@ -71,7 +71,7 @@ def examples():
 
     root_path = './sample'
     find = None
-    journey = path_traveller(root_path=root_path, find=find)
+    journey = travelling(root_path=root_path, find=find)
     root_path = journey.root_path
     current_working_directory = journey.cwd
     print("""Input parameters:
@@ -99,7 +99,7 @@ def examples():
     find = 'spec.json'
     print("Identifying '{}' file".format(find))
     print("""{}""".format("-" * 28))
-    journey = path_traveller(root_path=root_path, find=find)
+    journey = travelling(root_path=root_path, find=find)
     root_path = journey.root_path
     current_working_directory = journey.cwd
     print("""Input parameters:
@@ -125,27 +125,25 @@ def examples():
 
 @click.command()
 @click.option('--root_path', '-P', prompt='Type . for current root directory. \
-\nEnter your root path', default=None, show_default='None',
-              type=str, help="Any path from which you want to start \
+\nEnter your root path', default=None, show_default=None,
+            type=str, help="Any path from which you want to start \
 travelling. If None is given then the root directory of this module will \
 act as root path. The default is None.")
-@click.option('--find', '-F', default=None, prompt='\nEnter your file name \
-you  want to search', show_default='None',
-              type=str, help="Find any file name which you want to identify \
-no matter whether is it present in any of the subdirectories. \
-If None is given all find will be searching. The default is None.")
+@click.option('--find', '-F', default=None, show_default=None,
+            type=str, help="Find any file name which you want to search. \
+The default is None.")
 @click.option('--show_absolute_paths', '-A', prompt='\nType True if you want \
 to display absolute paths of your search otherwise type [Enter]',
-              default=False, show_default='False', type=bool,
-              help="Print absolute paths")
+            default=False, show_default='False', type=bool,
+            help="Print absolute paths")
 @click.option('--show_relative_paths', '-R', prompt='\nType True if you want \
 to display relative paths of your search otherwise type [Enter]',
-              default=False, show_default='False', type=bool,
-              help="Print relative paths")
+            default=False, show_default='False', type=bool,
+            help="Print relative paths")
 @click.option('--show_examples', '-E', prompt='\nType True if you want to \
 display default examples otherwise type [Enter]',
-              default=False, show_default='False', type=bool,
-              help="Print predefined examples")
+            default=False, show_default='False', type=bool,
+            help="Print predefined examples")
 def main(root_path=None, find=None, show_absolute_paths=False,
          show_relative_paths=False, show_examples=False):
     if not (pathlib.PosixPath(root_path).is_dir()
@@ -153,15 +151,16 @@ def main(root_path=None, find=None, show_absolute_paths=False,
         click.echo("\nPlease enter the correct root path. You can use . for \
 current directory\n")
         return main()
-    print(root_path, find)
-    # try:
-    journey = path_traveller(root_path=root_path, find=find)
-
-    # except (SyntaxError, TypeError, NameError):
-    #     click.echo("Please enter the valid arguments\n")
-    #     return main()
+    try:
+        journey = travelling(root_path=root_path, find=find)
+    except (SyntaxError, TypeError, NameError, FileNotFoundError):
+        click.echo("Please enter the valid arguments\n")
+        return main()
     if show_examples:
-        examples()
+        try:
+            examples()
+        except FileNotFoundError:
+            click.echo("Examples cannot be shown.")            
     if show_absolute_paths:
         print()
         print("Absolute paths: {}".format(journey.absolute_paths))

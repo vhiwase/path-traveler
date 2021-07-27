@@ -1,3 +1,2 @@
-from path_traveller import main
-print("__main__")
+from path_traveller import main, examples
 main()
