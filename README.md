@@ -207,26 +207,9 @@ tox
 python3 -m doctest path_traveler/path_identifier.py
 ```
 
-### Calling for unittest
-```
-python3 -m unittest discover
-python3 -m pytest 
-```
-
-### Calling for sample examples
-Use the following command to run sample examples from command line interface:
-```
-matrix_rotation
-```
-This command will prompt a message in the console. If you want to run sample examples just type ```None``` in the console.
-```
-Type "None" to display default examples.
-Enter your matrix: <None>
-```
-
 Use the following command to run sample examples in the python code:
 ```
->>> from matrix_rotation import examples
+>>> from path_traveler import examples
 >>> examples()
 ```
 

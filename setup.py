@@ -18,7 +18,7 @@ test_requirements = [
 
 setup(
     name='path_traveler',
-    version='0.2.2',
+    version='0.0.1',
     description="Travel any path and find some files.",
     long_description=readme,
     long_description_content_type='text/markdown',
@@ -48,7 +48,6 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
-        'Programming Language :: Python :: 3.9',
     ],
     python_requires='>=3.6',
     test_suite='tests',
