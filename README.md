@@ -193,7 +193,7 @@ python3 path_traveler/path_identifier_cli.py --root_path /home/vaibhav/path-trav
 python3 path_traveler/path_identifier_cli.py --root_path /home/vaibhav/path-traveler/path_traveler/sample/ --find spec.json --show_absolute_paths False --show_relative_paths False --show_examples True
 ```
 
-### Calling for tox automation
+## Calling for tox automation
 tox is a command line driven CI frontend and development task automation tool. At its core tox provides a convenient way to run arbitrary commands in isolated environments to serve as a single entry point for build, test and release activities.
 
 To create and run tox supported environment use the following command:
