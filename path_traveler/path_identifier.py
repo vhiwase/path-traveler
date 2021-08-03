@@ -38,26 +38,26 @@ def _walk(path: str, search_name: str = None, absolute_key: bool = False,
         all subdirectories.
 
     >>> location = pathlib.PosixPath('.')
-    
+
     >>> find = None
-    
+
     >>> absolute_paths = _walk(location.as_posix(), absolute_key=False, absolute_value=True, search_name=find, output_dict=False)
-    
+
     >>> type(absolute_paths)
     <class 'list'>
-    
+
     >>> relative_paths = _walk(location.as_posix(), absolute_key=False, absolute_value=False, search_name=find, output_dict=False)
-    
+
     >>> type(relative_paths)
     <class 'list'>
-    
+
     >>> absolute_paths = _walk(location.as_posix(), absolute_key=False, absolute_value=True, search_name=find, output_dict=True)
-    
+
     >>> type(absolute_paths)
     <class 'dict'>
-    
+
     >>> relative_paths = _walk(location.as_posix(), absolute_key=False, absolute_value=False, search_name=find, output_dict=True)
-    
+
     >>> type(relative_paths)
     <class 'dict'>
     """
@@ -109,9 +109,11 @@ def find_available_path(from_list: list):
     -------
     available_item_list: list
         1D list
-    
-    >>> relative_paths = ['spec.json', [None, None, None, [None, None, None, None], None, ['directory2/directory22/spec.json', None, None, None, None]], ['directory1/spec.json', [None, None, None, None], None, None, [None, None, None, None], None, None]]
-    
+
+    >>> relative_paths = ['spec.json', [None, None, None, [None, None, None, None], None, \
+['directory2/directory22/spec.json', None, None, None, None]], ['directory1/spec.json', \
+[None, None, None, None], None, None, [None, None, None, None], None, None]]
+
     >>> find_available_path(relative_paths)
     ['spec.json', 'directory2/directory22/spec.json', 'directory1/spec.json']
     """
@@ -149,7 +151,7 @@ def walk(path: str, search_name: str = None):
         all subdirectories.
 
     >>> walking_result = walk(path='.', search_name='some_file_name')
-    
+
     >>> type(walking_result)
     <class 'dict'>
     """
@@ -192,16 +194,16 @@ def validate_identifier(identifier: str):
         Valid variable name in the form of string. Validation is done by
         replacing all punctuation charachters by '_' and putting 'prefix'
         string if any variable starts with any punctuation character.
-    
+
     >>> validate_identifier(identifier='file1.py')
     'file1_py'
-    
+
     >>> validate_identifier(identifier='spec.json')
     'spec_json'
-    
+
     >>> validate_identifier(identifier='.git')
     'prefix_git'
-    
+
     >>> validate_identifier(identifier='__init__.py')
     'prefix__init___py'
     """
@@ -234,11 +236,38 @@ def dict2obj(d: dict):
     -------
     object
         Object whcih identify files and folders recursively.
-    
-    >>> my_dict = {'sample': ['/home/vaibhav/path-traveler/path_traveler/sample/spec.json', {'directory2': ['/home/vaibhav/path-traveler/path_traveler/sample/directory2/file22.py', '/home/vaibhav/path-traveler/path_traveler/sample/directory2/file22.txt', '/home/vaibhav/path-traveler/path_traveler/sample/directory2/file21.py', {'directory21': ['/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory21/file211.py', '/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory21/file212.txt', '/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory21/file211.txt', '/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory21/file212.py']}, '/home/vaibhav/path-traveler/path_traveler/sample/directory2/file21.txt', {'directory22': ['/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory22/spec.json', '/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory22/file221.txt', '/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory22/file222.py', '/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory22/file221.py', '/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory22/file222.txt']}]}, {'directory1': ['/home/vaibhav/path-traveler/path_traveler/sample/directory1/spec.json', {'directory11': ['/home/vaibhav/path-traveler/path_traveler/sample/directory1/directory11/file112.py', '/home/vaibhav/path-traveler/path_traveler/sample/directory1/directory11/file111.py', '/home/vaibhav/path-traveler/path_traveler/sample/directory1/directory11/file111.txt', '/home/vaibhav/path-traveler/path_traveler/sample/directory1/directory11/file112.txt']}, '/home/vaibhav/path-traveler/path_traveler/sample/directory1/file11.txt', '/home/vaibhav/path-traveler/path_traveler/sample/directory1/file11.py', {'directory12': ['/home/vaibhav/path-traveler/path_traveler/sample/directory1/directory12/file121.py', '/home/vaibhav/path-traveler/path_traveler/sample/directory1/directory12/file122.py', '/home/vaibhav/path-traveler/path_traveler/sample/directory1/directory12/file122.txt', '/home/vaibhav/path-traveler/path_traveler/sample/directory1/directory12/file121.txt']}, '/home/vaibhav/path-traveler/path_traveler/sample/directory1/file12.py', '/home/vaibhav/path-traveler/path_traveler/sample/directory1/file12.txt']}]}
-    
+
+    >>> my_dict = {\
+        'sample': ['/home/vaibhav/path-traveler/path_traveler/sample/spec.json',\
+            {'directory2': ['/home/vaibhav/path-traveler/path_traveler/sample/directory2/file22.py',\
+                            '/home/vaibhav/path-traveler/path_traveler/sample/directory2/file22.txt',\
+                            '/home/vaibhav/path-traveler/path_traveler/sample/directory2/file21.py',\
+                            {'directory21': ['/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory21/file211.py',\
+                                             '/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory21/file212.txt',\
+                                             '/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory21/file211.txt',\
+                                             '/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory21/file212.py']},\
+                            '/home/vaibhav/path-traveler/path_traveler/sample/directory2/file21.txt',\
+                            {'directory22': ['/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory22/spec.json',\
+                                             '/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory22/file221.txt',\
+                                             '/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory22/file222.py',\
+                                             '/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory22/file221.py',\
+                                             '/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory22/file222.txt']}]},\
+            {'directory1': ['/home/vaibhav/path-traveler/path_traveler/sample/directory1/spec.json',\
+                            {'directory11': ['/home/vaibhav/path-traveler/path_traveler/sample/directory1/directory11/file112.py',\
+                                             '/home/vaibhav/path-traveler/path_traveler/sample/directory1/directory11/file111.py',\
+                                             '/home/vaibhav/path-traveler/path_traveler/sample/directory1/directory11/file111.txt',\
+                                             '/home/vaibhav/path-traveler/path_traveler/sample/directory1/directory11/file112.txt']},\
+                            '/home/vaibhav/path-traveler/path_traveler/sample/directory1/file11.txt',\
+                            '/home/vaibhav/path-traveler/path_traveler/sample/directory1/file11.py',\
+                            {'directory12': ['/home/vaibhav/path-traveler/path_traveler/sample/directory1/directory12/file121.py',\
+                                             '/home/vaibhav/path-traveler/path_traveler/sample/directory1/directory12/file122.py',\
+                                             '/home/vaibhav/path-traveler/path_traveler/sample/directory1/directory12/file122.txt',\
+                                             '/home/vaibhav/path-traveler/path_traveler/sample/directory1/directory12/file121.txt']},\
+                            '/home/vaibhav/path-traveler/path_traveler/sample/directory1/file12.py',\
+                            '/home/vaibhav/path-traveler/path_traveler/sample/directory1/file12.txt']}]}
+
     >>> obj = dict2obj(my_dict)
-    
+
     >>> obj
     sample
     """
@@ -300,15 +329,68 @@ def obj2namedtuple(path_traveler: dict2obj):
     named_tuple : namedtuple
         namedtuple object which is dynamically created using path name
         given by ls.files and ls.folder namedtuple used in dict2obj
-    
-    >>> my_dict = {'sample': ['path-traveler/path_traveler/sample/spec.json', {'directory2': ['path-traveler/path_traveler/sample/directory2/file22.py', 'path-traveler/path_traveler/sample/directory2/file22.txt', 'path-traveler/path_traveler/sample/directory2/file21.py', {'directory21': ['path-traveler/path_traveler/sample/directory2/directory21/file211.py', 'path-traveler/path_traveler/sample/directory2/directory21/file212.txt', 'path-traveler/path_traveler/sample/directory2/directory21/file211.txt', 'path-traveler/path_traveler/sample/directory2/directory21/file212.py']}, 'path-traveler/path_traveler/sample/directory2/file21.txt', {'directory22': ['path-traveler/path_traveler/sample/directory2/directory22/spec.json', 'path-traveler/path_traveler/sample/directory2/directory22/file221.txt', 'path-traveler/path_traveler/sample/directory2/directory22/file222.py', 'path-traveler/path_traveler/sample/directory2/directory22/file221.py', 'path-traveler/path_traveler/sample/directory2/directory22/file222.txt']}]}, {'directory1': ['path-traveler/path_traveler/sample/directory1/spec.json', {'directory11': ['path-traveler/path_traveler/sample/directory1/directory11/file112.py', 'path-traveler/path_traveler/sample/directory1/directory11/file111.py', 'path-traveler/path_traveler/sample/directory1/directory11/file111.txt', 'path-traveler/path_traveler/sample/directory1/directory11/file112.txt']}, 'path-traveler/path_traveler/sample/directory1/file11.txt', 'path-traveler/path_traveler/sample/directory1/file11.py', {'directory12': ['path-traveler/path_traveler/sample/directory1/directory12/file121.py', 'path-traveler/path_traveler/sample/directory1/directory12/file122.py', 'path-traveler/path_traveler/sample/directory1/directory12/file122.txt', 'path-traveler/path_traveler/sample/directory1/directory12/file121.txt']}, 'path-traveler/path_traveler/sample/directory1/file12.py', 'path-traveler/path_traveler/sample/directory1/file12.txt']}]}
-    
+
+    >>> my_dict ={\
+        'sample': ['path-traveler/path_traveler/sample/spec.json',\
+            {'directory2': ['path-traveler/path_traveler/sample/directory2/file22.py',\
+                            'path-traveler/path_traveler/sample/directory2/file22.txt',\
+                            'path-traveler/path_traveler/sample/directory2/file21.py',\
+                            {'directory21': ['path-traveler/path_traveler/sample/directory2/directory21/file211.py',\
+                                             'path-traveler/path_traveler/sample/directory2/directory21/file212.txt',\
+                                             'path-traveler/path_traveler/sample/directory2/directory21/file211.txt',\
+                                             'path-traveler/path_traveler/sample/directory2/directory21/file212.py']},\
+                            'path-traveler/path_traveler/sample/directory2/file21.txt',\
+                            {'directory22': ['path-traveler/path_traveler/sample/directory2/directory22/spec.json',\
+                                             'path-traveler/path_traveler/sample/directory2/directory22/file221.txt',\
+                                             'path-traveler/path_traveler/sample/directory2/directory22/file222.py',\
+                                             'path-traveler/path_traveler/sample/directory2/directory22/file221.py',\
+                                             'path-traveler/path_traveler/sample/directory2/directory22/file222.txt']}]},\
+            {'directory1': ['path-traveler/path_traveler/sample/directory1/spec.json',\
+                            {'directory11': ['path-traveler/path_traveler/sample/directory1/directory11/file112.py',\
+                                             'path-traveler/path_traveler/sample/directory1/directory11/file111.py',\
+                                             'path-traveler/path_traveler/sample/directory1/directory11/file111.txt',\
+                                             'path-traveler/path_traveler/sample/directory1/directory11/file112.txt']},\
+                            'path-traveler/path_traveler/sample/directory1/file11.txt',\
+                            'path-traveler/path_traveler/sample/directory1/file11.py',\
+                            {'directory12': ['path-traveler/path_traveler/sample/directory1/directory12/file121.py',\
+                                             'path-traveler/path_traveler/sample/directory1/directory12/file122.py',\
+                                             'path-traveler/path_traveler/sample/directory1/directory12/file122.txt',\
+                                             'path-traveler/path_traveler/sample/directory1/directory12/file121.txt']},\
+                            'path-traveler/path_traveler/sample/directory1/file12.py',\
+                            'path-traveler/path_traveler/sample/directory1/file12.txt']}]}
+
     >>> obj = dict2obj(my_dict)
-    
+
     >>> travel = obj2namedtuple(obj)
-    
+
     >>> travel
-    NamedTuple(directory1=NamedTuple(directory11=NamedTuple(file111_py='path-traveler/path_traveler/sample/directory1/directory11/file111.py', file111_txt='path-traveler/path_traveler/sample/directory1/directory11/file111.txt', file112_py='path-traveler/path_traveler/sample/directory1/directory11/file112.py', file112_txt='path-traveler/path_traveler/sample/directory1/directory11/file112.txt'), directory12=NamedTuple(file121_py='path-traveler/path_traveler/sample/directory1/directory12/file121.py', file121_txt='path-traveler/path_traveler/sample/directory1/directory12/file121.txt', file122_py='path-traveler/path_traveler/sample/directory1/directory12/file122.py', file122_txt='path-traveler/path_traveler/sample/directory1/directory12/file122.txt'), file11_py='path-traveler/path_traveler/sample/directory1/file11.py', file11_txt='path-traveler/path_traveler/sample/directory1/file11.txt', file12_py='path-traveler/path_traveler/sample/directory1/file12.py', file12_txt='path-traveler/path_traveler/sample/directory1/file12.txt', spec_json='path-traveler/path_traveler/sample/directory1/spec.json'), directory2=NamedTuple(directory21=NamedTuple(file211_py='path-traveler/path_traveler/sample/directory2/directory21/file211.py', file211_txt='path-traveler/path_traveler/sample/directory2/directory21/file211.txt', file212_py='path-traveler/path_traveler/sample/directory2/directory21/file212.py', file212_txt='path-traveler/path_traveler/sample/directory2/directory21/file212.txt'), directory22=NamedTuple(file221_py='path-traveler/path_traveler/sample/directory2/directory22/file221.py', file221_txt='path-traveler/path_traveler/sample/directory2/directory22/file221.txt', file222_py='path-traveler/path_traveler/sample/directory2/directory22/file222.py', file222_txt='path-traveler/path_traveler/sample/directory2/directory22/file222.txt', spec_json='path-traveler/path_traveler/sample/directory2/directory22/spec.json'), file21_py='path-traveler/path_traveler/sample/directory2/file21.py', file21_txt='path-traveler/path_traveler/sample/directory2/file21.txt', file22_py='path-traveler/path_traveler/sample/directory2/file22.py', file22_txt='path-traveler/path_traveler/sample/directory2/file22.txt'), spec_json='path-traveler/path_traveler/sample/spec.json')
+    NamedTuple(directory1=NamedTuple(directory11=NamedTuple(file111_py='path-traveler/path_traveler/sample/directory1/directory11/file111.py', \
+file111_txt='path-traveler/path_traveler/sample/directory1/directory11/file111.txt', \
+file112_py='path-traveler/path_traveler/sample/directory1/directory11/file112.py', \
+file112_txt='path-traveler/path_traveler/sample/directory1/directory11/file112.txt'), \
+directory12=NamedTuple(file121_py='path-traveler/path_traveler/sample/directory1/directory12/file121.py', \
+file121_txt='path-traveler/path_traveler/sample/directory1/directory12/file121.txt', \
+file122_py='path-traveler/path_traveler/sample/directory1/directory12/file122.py', \
+file122_txt='path-traveler/path_traveler/sample/directory1/directory12/file122.txt'), \
+file11_py='path-traveler/path_traveler/sample/directory1/file11.py', \
+file11_txt='path-traveler/path_traveler/sample/directory1/file11.txt', \
+file12_py='path-traveler/path_traveler/sample/directory1/file12.py', \
+file12_txt='path-traveler/path_traveler/sample/directory1/file12.txt', \
+spec_json='path-traveler/path_traveler/sample/directory1/spec.json'), \
+directory2=NamedTuple(directory21=NamedTuple(file211_py='path-traveler/path_traveler/sample/directory2/directory21/file211.py', \
+file211_txt='path-traveler/path_traveler/sample/directory2/directory21/file211.txt', \
+file212_py='path-traveler/path_traveler/sample/directory2/directory21/file212.py', \
+file212_txt='path-traveler/path_traveler/sample/directory2/directory21/file212.txt'), \
+directory22=NamedTuple(file221_py='path-traveler/path_traveler/sample/directory2/directory22/file221.py', \
+file221_txt='path-traveler/path_traveler/sample/directory2/directory22/file221.txt', \
+file222_py='path-traveler/path_traveler/sample/directory2/directory22/file222.py', \
+file222_txt='path-traveler/path_traveler/sample/directory2/directory22/file222.txt', \
+spec_json='path-traveler/path_traveler/sample/directory2/directory22/spec.json'), \
+file21_py='path-traveler/path_traveler/sample/directory2/file21.py', \
+file21_txt='path-traveler/path_traveler/sample/directory2/file21.txt', \
+file22_py='path-traveler/path_traveler/sample/directory2/file22.py', \
+file22_txt='path-traveler/path_traveler/sample/directory2/file22.txt'), \
+spec_json='path-traveler/path_traveler/sample/spec.json')
 
     >>> type(travel)
     <class 'path_identifier.NamedTuple'>
@@ -320,7 +402,10 @@ def obj2namedtuple(path_traveler: dict2obj):
     'path-traveler/path_traveler/sample/directory1/directory11/file111.py'
 
     >>> travel.directory1.directory12
-    NamedTuple(file121_py='path-traveler/path_traveler/sample/directory1/directory12/file121.py', file121_txt='path-traveler/path_traveler/sample/directory1/directory12/file121.txt', file122_py='path-traveler/path_traveler/sample/directory1/directory12/file122.py', file122_txt='path-traveler/path_traveler/sample/directory1/directory12/file122.txt')
+    NamedTuple(file121_py='path-traveler/path_traveler/sample/directory1/directory12/file121.py', \
+file121_txt='path-traveler/path_traveler/sample/directory1/directory12/file121.txt', \
+file122_py='path-traveler/path_traveler/sample/directory1/directory12/file122.py', \
+file122_txt='path-traveler/path_traveler/sample/directory1/directory12/file122.txt')
 
     >>> travel.spec_json
     'path-traveler/path_traveler/sample/spec.json'
@@ -364,7 +449,7 @@ def travelling(root_path: str = None, find: str = None):
         the root directory of this module will act as root path.
         The default is None.
     find : str, optional
-        Find any file from root directory and all of its children directories. 
+        Find any file from root directory and all of its children directories.
         If None is given all find will be searching. The default is None.
 
     Returns
@@ -374,11 +459,11 @@ def travelling(root_path: str = None, find: str = None):
         absolute paths, relative paths and a namedtuple object for travelling.
 
     >>> root_path = None
-    
+
     >>> find = 'spec.json'
-    
+
     >>> journey = travelling(root_path=root_path, find=find)
-    
+
     >>> journey._fields
     ('root_path', 'cwd', 'absolute_paths', 'relative_paths', 'travel')
     """

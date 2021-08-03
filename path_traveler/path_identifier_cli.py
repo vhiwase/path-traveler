@@ -126,28 +126,27 @@ def examples():
 @click.command()
 @click.option('--root_path', '-P', prompt='Type . for current root directory. \
 \nEnter your root path', default=None, show_default=None,
-            type=str, help="Any path from which you want to start \
+              type=str, help="Any path from which you want to start \
 travelling. If None is given then the root directory of this module will \
 act as root path. The default is None.")
 @click.option('--find', '-F', default=None, show_default=None,
-            type=str, help="Find any file name which you want to search. \
+              type=str, help="Find any file name which you want to search. \
 The default is None.")
 @click.option('--show_absolute_paths', '-A', prompt='\nType True if you want \
 to display absolute paths of your search otherwise type [Enter]',
-            default=False, show_default='False', type=bool,
-            help="Print absolute paths")
+              default=False, show_default='False', type=bool,
+              help="Print absolute paths")
 @click.option('--show_relative_paths', '-R', prompt='\nType True if you want \
 to display relative paths of your search otherwise type [Enter]',
-            default=False, show_default='False', type=bool,
-            help="Print relative paths")
+              default=False, show_default='False', type=bool,
+              help="Print relative paths")
 @click.option('--show_examples', '-E', prompt='\nType True if you want to \
 display default examples otherwise type [Enter]',
-            default=False, show_default='False', type=bool,
-            help="Print predefined examples")
+              default=False, show_default='False', type=bool,
+              help="Print predefined examples")
 def main(root_path=None, find=None, show_absolute_paths=False,
          show_relative_paths=False, show_examples=False):
-    if not (pathlib.PosixPath(root_path).is_dir()
-            or pathlib.PosixPath(root_path).is_file()):
+    if not (pathlib.PosixPath(root_path).is_dir() or pathlib.PosixPath(root_path).is_file()):
         click.echo("\nPlease enter the correct root path. You can use . for \
 current directory\n")
         return main()
@@ -160,7 +159,7 @@ current directory\n")
         try:
             examples()
         except FileNotFoundError:
-            click.echo("Examples cannot be shown.")            
+            click.echo("Examples cannot be shown.")
     if show_absolute_paths:
         print()
         print("Absolute paths: {}".format(journey.absolute_paths))
