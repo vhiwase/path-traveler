@@ -1,8 +1,8 @@
 # Travel any path and find some files
-```path-traveller``` is a simple package to walk and travel from any root path directory into all of its children directories and files coming in the journey and perform search operation to list down all available path(s) of the file(s).
+```path-traveler``` is a simple package to walk and travel from any root path directory into all of its children directories and files coming in the journey and perform search operation to list down all available path(s) of the file(s).
 
 ## Use in python code
-Following are some of the sample examples to show the use of the ```path-traveller``` package. This package has a function named ```travelling``` which takes optional input 2 arguments. ```root_path``` is the first argument used to set the root directory path and ```find``` is the second argument used to search any file in the root directory and all of its children directories. The default is ```None``` which searches all files from ```root_path```. Let's take a look.
+Following are some of the sample examples to show the use of the ```path-traveler``` package. This package has a function named ```travelling``` which takes optional input 2 arguments. ```root_path``` is the first argument used to set the root directory path and ```find``` is the second argument used to search any file in the root directory and all of its children directories. The default is ```None``` which searches all files from ```root_path```. Let's take a look.
 ```
 >>> from path_traveler import travelling
 
@@ -30,7 +30,7 @@ Following are some of the sample examples to show the use of the ```path-travell
 
 ```path_traveler --help```
 ```
-Usage: path-traveller [OPTIONS]
+Usage: path-traveler [OPTIONS]
 
 Options:
   -P, --root_path TEXT            Any path from which you want to start
@@ -53,7 +53,7 @@ Options:
 
   --help                          Show this message and exit.
 ```
-For more information please visit [GitHub](https://github.com/vhiwase/path-traveller/ "Github Link")
+For more information please visit [GitHub](https://github.com/vhiwase/path-traveler/ "Github Link")
 
 # License
 MIT License

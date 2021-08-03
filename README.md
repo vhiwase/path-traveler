@@ -3,12 +3,12 @@ Walk and travel from any root path directory into all of its children directorie
 
 ## How to install this package
 ```
-pip install path-traveller
+pip install path-traveler
 ```
-Visit [path-traveller](https://pypi.org/project/path-traveller/ "path-traveller pypi package") 
+Visit [path-traveler](https://pypi.org/project/path-traveler/ "path-traveler pypi package") 
 
 ## How to use this package in python code
-Following are some of the sample examples to show the use of the ```path-traveller``` package. This package has a function named ```travelling``` which takes optional input 2 arguments. ```root_path``` is the first argument used to set the root directory path and ```find``` is the second argument used to search any file in the root directory and all of its children directories. The default is ```None``` which searches all files from ```root_path```. Let's take a look.
+Following are some of the sample examples to show the use of the ```path-traveler``` package. This package has a function named ```travelling``` which takes optional input 2 arguments. ```root_path``` is the first argument used to set the root directory path and ```find``` is the second argument used to search any file in the root directory and all of its children directories. The default is ```None``` which searches all files from ```root_path```. Let's take a look.
 
 ## How to download sample directories and identify its root path
 
@@ -16,12 +16,12 @@ Following are some of the sample examples to show the use of the ```path-travell
 $ pwd
 /home/vaibhav
 
-$ git clone https://github.com/vhiwase/path-traveller.git
+$ git clone https://github.com/vhiwase/path-traveler.git
 
-$ cd path-traveller/path_traveler/sample/
+$ cd path-traveler/path_traveler/sample/
 
 $ pwd
-/home/vaibhav/path-traveller/path_traveler/sample
+/home/vaibhav/path-traveler/path_traveler/sample
 ```
 
 ## How to use this package to search a specific file named 'spec.json'
@@ -30,7 +30,7 @@ $ pwd
 $ python3
 >>> from path_traveler import travelling
 
->>> root_path = '/home/vaibhav/path-traveller/path_traveler/sample'
+>>> root_path = '/home/vaibhav/path-traveler/path_traveler/sample'
 
 >>> find = 'spec.json'
 
@@ -42,17 +42,17 @@ $ python3
 >>> root_path = journey.root_path
 
 >>> root_path
-'/home/vaibhav/path-traveller/path_traveler/sample'
+'/home/vaibhav/path-traveler/path_traveler/sample'
 
 >>> current_working_directory = journey.cwd
 
 >>> current_working_directory
-'/home/vaibhav/path-traveller/path_traveler/sample'
+'/home/vaibhav/path-traveler/path_traveler/sample'
 
 >>> absolute_paths = journey.absolute_paths
 
 >>> absolute_paths
-['/home/vaibhav/path-traveller/path_traveler/sample/spec.json', '/home/vaibhav/path-traveller/path_traveler/sample/directory2/directory22/spec.json', '/home/vaibhav/path-traveller/path_traveler/sample/directory1/spec.json']
+['/home/vaibhav/path-traveler/path_traveler/sample/spec.json', '/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory22/spec.json', '/home/vaibhav/path-traveler/path_traveler/sample/directory1/spec.json']
 
 >>> relative_paths = journey.relative_paths
 
@@ -62,13 +62,13 @@ $ python3
 >>> traveller = journey.travel
 
 >>> traveller.directory1.directory11.file111_py
-'/home/vaibhav/path-traveller/path_traveler/sample/directory1/directory11/file111.py'
+'/home/vaibhav/path-traveler/path_traveler/sample/directory1/directory11/file111.py'
 
 >>> traveller.directory2.directory21.file212_txt
-'/home/vaibhav/path-traveller/path_traveler/sample/directory2/directory21/file212.txt'
+'/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory21/file212.txt'
 
 >>> traveller.directory2.directory22.spec_json
-'/home/vaibhav/path-traveller/path_traveler/sample/directory2/directory22/spec.json'
+'/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory22/spec.json'
 
 ```
 
@@ -78,7 +78,7 @@ $ python3
 $ python3
 >>> from path_traveler import travelling
 
->>> root_path='/home/vaibhav/path-traveller/path_traveler/sample/directory2/'
+>>> root_path='/home/vaibhav/path-traveler/path_traveler/sample/directory2/'
 
 >>> journey = travelling(root_path=root_path)
 
@@ -88,17 +88,17 @@ $ python3
 >>> root_path = journey.root_path
 
 >>> root_path
-'/home/vaibhav/path-traveller/path_traveler/sample/directory2'
+'/home/vaibhav/path-traveler/path_traveler/sample/directory2'
 
 >>> current_working_directory = journey.cwd
 
 >>> current_working_directory
-'/home/vaibhav/path-traveller/path_traveler/sample/directory2'
+'/home/vaibhav/path-traveler/path_traveler/sample/directory2'
 
 >>> absolute_paths = journey.absolute_paths
 
 >>> absolute_paths
-['/home/vaibhav/path-traveller/path_traveler/sample/directory2/file22.py', '/home/vaibhav/path-traveller/path_traveler/sample/directory2/file22.txt', '/home/vaibhav/path-traveller/path_traveler/sample/directory2/file21.py', '/home/vaibhav/path-traveller/path_traveler/sample/directory2/directory21/file211.py', '/home/vaibhav/path-traveller/path_traveler/sample/directory2/directory21/file212.txt', '/home/vaibhav/path-traveller/path_traveler/sample/directory2/directory21/file211.txt', '/home/vaibhav/path-traveller/path_traveler/sample/directory2/directory21/file212.py', '/home/vaibhav/path-traveller/path_traveler/sample/directory2/file21.txt', '/home/vaibhav/path-traveller/path_traveler/sample/directory2/directory22/spec.json', '/home/vaibhav/path-traveller/path_traveler/sample/directory2/directory22/file221.txt', '/home/vaibhav/path-traveller/path_traveler/sample/directory2/directory22/file222.py', '/home/vaibhav/path-traveller/path_traveler/sample/directory2/directory22/file221.py', '/home/vaibhav/path-traveller/path_traveler/sample/directory2/directory22/file222.txt']
+['/home/vaibhav/path-traveler/path_traveler/sample/directory2/file22.py', '/home/vaibhav/path-traveler/path_traveler/sample/directory2/file22.txt', '/home/vaibhav/path-traveler/path_traveler/sample/directory2/file21.py', '/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory21/file211.py', '/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory21/file212.txt', '/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory21/file211.txt', '/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory21/file212.py', '/home/vaibhav/path-traveler/path_traveler/sample/directory2/file21.txt', '/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory22/spec.json', '/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory22/file221.txt', '/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory22/file222.py', '/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory22/file221.py', '/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory22/file222.txt']
 
 >>> relative_paths = journey.relative_paths
 
@@ -108,7 +108,7 @@ $ python3
 >>> traveller = journey.travel
 
 >>> traveller.directory21.file211_txt
-'/home/vaibhav/path-traveller/path_traveler/sample/directory2/directory21/file211.txt'
+'/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory21/file211.txt'
 
 ```
 
@@ -118,7 +118,7 @@ $ python3
 
 ```path_traveler --help```
 ```
-Usage: path-traveller [OPTIONS]
+Usage: path-traveler [OPTIONS]
 
 Options:
   -P, --root_path TEXT            Any path from which you want to start
@@ -148,33 +148,33 @@ Options:
 #### Calling with --root_path or -P
 Here default arguments will be ```find=None```
 ```
-path_traveler --root_path /home/vaibhav/path-traveller/path_traveler/sample/
-path_traveler -P /home/vaibhav/path-traveller/path_traveler/sample
+path_traveler --root_path /home/vaibhav/path-traveler/path_traveler/sample/
+path_traveler -P /home/vaibhav/path-traveler/path_traveler/sample
 ```
 
 #### Calling with --root_path or -P and --find or -F
 ```
-path_traveler --root_path /home/vaibhav/path-traveller/path_traveler/sample/ --find spec.json
-path_traveler -P /home/vaibhav/path-traveller/path_traveler/sample -F spec.json
+path_traveler --root_path /home/vaibhav/path-traveler/path_traveler/sample/ --find spec.json
+path_traveler -P /home/vaibhav/path-traveler/path_traveler/sample -F spec.json
 ```
 
 #### Calling with --root_path or -P, --find or -F or and --show_absolute_paths or -A
 Here default arguments will be ```print_matrix=False```
 ```
-path_traveler --root_path /home/vaibhav/path-traveller/path_traveler/sample/ --find spec.json --show_absolute_paths True
-path_traveler -P /home/vaibhav/path-traveller/path_traveler/sample -F spec.json -A True
+path_traveler --root_path /home/vaibhav/path-traveler/path_traveler/sample/ --find spec.json --show_absolute_paths True
+path_traveler -P /home/vaibhav/path-traveler/path_traveler/sample -F spec.json -A True
 ```
 
 #### Calling with --root_path or -P, --find or -F or, --show_absolute_paths or -A and --show_relative_paths or -R
 ```
-path_traveler --root_path /home/vaibhav/path-traveller/path_traveler/sample/ --find spec.json --show_absolute_paths False --show_relative_paths True
-path_traveler -P /home/vaibhav/path-traveller/path_traveler/sample -F spec.json -A False -R True
+path_traveler --root_path /home/vaibhav/path-traveler/path_traveler/sample/ --find spec.json --show_absolute_paths False --show_relative_paths True
+path_traveler -P /home/vaibhav/path-traveler/path_traveler/sample -F spec.json -A False -R True
 ```
 
 #### Calling with --root_path or -P, --find or -F or, --show_absolute_paths or -A, --show_relative_paths or -R and --show_examples or -E
 ```
-path_traveler --root_path /home/vaibhav/path-traveller/path_traveler/sample/ --find spec.json --show_absolute_paths False --show_relative_paths False --show_examples True
-path_traveler -P /home/vaibhav/path-traveller/path_traveler/sample -F spec.json -A False -R False -E True
+path_traveler --root_path /home/vaibhav/path-traveler/path_traveler/sample/ --find spec.json --show_absolute_paths False --show_relative_paths False --show_examples True
+path_traveler -P /home/vaibhav/path-traveler/path_traveler/sample -F spec.json -A False -R False -E True
 ```
 
 ### Calling from Command Line Interface (CLI) using ```python3```
@@ -182,15 +182,15 @@ You can also run the same using ```python3``` as well:
 ```
 python3 path_traveler/path_identifier_cli.py 
 
-python3 path_traveler/path_identifier_cli.py --root_path /home/vaibhav/path-traveller/path_traveler/sample/
+python3 path_traveler/path_identifier_cli.py --root_path /home/vaibhav/path-traveler/path_traveler/sample/
 
-python3 path_traveler/path_identifier_cli.py --root_path /home/vaibhav/path-traveller/path_traveler/sample/ --find spec.json
+python3 path_traveler/path_identifier_cli.py --root_path /home/vaibhav/path-traveler/path_traveler/sample/ --find spec.json
 
-python3 path_traveler/path_identifier_cli.py --root_path /home/vaibhav/path-traveller/path_traveler/sample/ --find spec.json --show_absolute_paths True
+python3 path_traveler/path_identifier_cli.py --root_path /home/vaibhav/path-traveler/path_traveler/sample/ --find spec.json --show_absolute_paths True
 
-python3 path_traveler/path_identifier_cli.py --root_path /home/vaibhav/path-traveller/path_traveler/sample/ --find spec.json --show_absolute_paths False --show_relative_paths True
+python3 path_traveler/path_identifier_cli.py --root_path /home/vaibhav/path-traveler/path_traveler/sample/ --find spec.json --show_absolute_paths False --show_relative_paths True
 
-python3 path_traveler/path_identifier_cli.py --root_path /home/vaibhav/path-traveller/path_traveler/sample/ --find spec.json --show_absolute_paths False --show_relative_paths False --show_examples True
+python3 path_traveler/path_identifier_cli.py --root_path /home/vaibhav/path-traveler/path_traveler/sample/ --find spec.json --show_absolute_paths False --show_relative_paths False --show_examples True
 ```
 
 ### Calling for tox automation

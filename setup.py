@@ -24,7 +24,7 @@ setup(
     long_description_content_type='text/markdown',
     author="Vaibhav Hiwase",
     author_email='hiwase.vaibhav@gmail.com',
-    url='https://github.com/vhiwase/path-traveller',
+    url='https://github.com/vhiwase/path-traveler',
     packages=[
         'path_traveler',
     ],
