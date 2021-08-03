@@ -1,2 +1,2 @@
-from path_traveller import main, examples
+from path_traveler import main, examples
 main()

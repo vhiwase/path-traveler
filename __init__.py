@@ -1,3 +1,3 @@
-from .path_traveller import *
+from .path_traveler import *
 
-__all__ = path_traveller.__all__
+__all__ = path_traveler.__all__

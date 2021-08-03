@@ -17,7 +17,7 @@ test_requirements = [
 ]
 
 setup(
-    name='path_traveller',
+    name='path_traveler',
     version='0.2.2',
     description="Travel any path and find some files.",
     long_description=readme,
@@ -26,19 +26,19 @@ setup(
     author_email='hiwase.vaibhav@gmail.com',
     url='https://github.com/vhiwase/path-traveller',
     packages=[
-        'path_traveller',
+        'path_traveler',
     ],
-    package_dir={'path_traveller': 'path_traveller'},
+    package_dir={'path_traveler': 'path_traveler'},
 
     entry_points={
         'console_scripts': [
-            'path_traveller=path_traveller.path_traveller_cli:main'
+            'path_traveler=path_traveler.path_traveler_cli:main'
         ]
     },
     install_requires=requirements,
     license="MIT license",
     zip_safe=False,
-    keywords='path_traveller',
+    keywords='path_traveler',
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',

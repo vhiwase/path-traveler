@@ -4,7 +4,7 @@
 ## Use in python code
 Following are some of the sample examples to show the use of the ```path-traveller``` package. This package has a function named ```travelling``` which takes optional input 2 arguments. ```root_path``` is the first argument used to set the root directory path and ```find``` is the second argument used to search any file in the root directory and all of its children directories. The default is ```None``` which searches all files from ```root_path```. Let's take a look.
 ```
->>> from path_traveller import travelling
+>>> from path_traveler import travelling
 
 >>> root_path = './sample'
     
@@ -28,7 +28,7 @@ Following are some of the sample examples to show the use of the ```path-travell
 
 ## Use in command line interface (CLI)
 
-```path_traveller --help```
+```path_traveler --help```
 ```
 Usage: path-traveller [OPTIONS]
 
