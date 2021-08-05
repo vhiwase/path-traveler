@@ -28,6 +28,9 @@ $ pwd
 
 ## How to use this package to search a specific file named 'spec.json'
 
+<img src="./gif/find_spec_json_file.gif" alt="My Project GIF">
+
+
 ```
 $ python3
 >>> from path_traveler import travelling
@@ -75,6 +78,9 @@ $ python3
 ```
 
 ## How to use this package to search all files
+
+<img src="./gif/find_all_files.gif" alt="My Project GIF">
+
 
 ```
 $ python3
@@ -155,26 +161,28 @@ path_traveler
 ```
 
 #### Calling with --root_path or -P
-Here default arguments will be ```find=None```
+Here default arguments will be ```find=None, --show_absolute_paths=False, --show_relative_paths=False and show_examples=False```
 ```
 path_traveler --root_path /home/vaibhav/path-traveler/path_traveler/sample/
 path_traveler -P /home/vaibhav/path-traveler/path_traveler/sample
 ```
 
 #### Calling with --root_path or -P and --find or -F
+Here default arguments will be ```--show_absolute_paths=False, --show_relative_paths=False and show_examples=False```
 ```
 path_traveler --root_path /home/vaibhav/path-traveler/path_traveler/sample/ --find spec.json
 path_traveler -P /home/vaibhav/path-traveler/path_traveler/sample -F spec.json
 ```
 
 #### Calling with --root_path or -P, --find or -F or and --show_absolute_paths or -A
-Here default arguments will be ```print_matrix=False```
+Here default arguments will be ```--show_relative_paths=False and show_examples=False```
 ```
 path_traveler --root_path /home/vaibhav/path-traveler/path_traveler/sample/ --find spec.json --show_absolute_paths True
 path_traveler -P /home/vaibhav/path-traveler/path_traveler/sample -F spec.json -A True
 ```
 
 #### Calling with --root_path or -P, --find or -F or, --show_absolute_paths or -A and --show_relative_paths or -R
+Here default arguments will be ```--show_examples=False```
 ```
 path_traveler --root_path /home/vaibhav/path-traveler/path_traveler/sample/ --find spec.json --show_absolute_paths False --show_relative_paths True
 path_traveler -P /home/vaibhav/path-traveler/path_traveler/sample -F spec.json -A False -R True
