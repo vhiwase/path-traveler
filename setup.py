@@ -32,7 +32,7 @@ setup(
 
     entry_points={
         'console_scripts': [
-            'path_traveler=path_traveler.path_traveler_cli:main'
+            'path_traveler=path_traveler.path_identifier_cli:main'
         ]
     },
     install_requires=requirements,

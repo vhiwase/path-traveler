@@ -145,6 +145,12 @@ Options:
 ### Calling for python package
 ```path_traveler``` can be directly called without using ```python3``` to work with command line interface (CLI).
 
+#### Calling without argument
+Calling without any argument passing
+```
+path_traveler
+```
+
 #### Calling with --root_path or -P
 Here default arguments will be ```find=None```
 ```
