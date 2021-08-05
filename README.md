@@ -1,6 +1,8 @@
 # Create a journey to walk and search on files.
 Walk and travel from any root path directory into all of its children directories and files coming in the journey and perform search operation to list down all available path(s) of the file(s).
 
+<img src="./gif/named_tuple.gif" alt="My Project GIF">
+
 ## How to install this package
 ```
 pip install path-traveler
@@ -111,8 +113,9 @@ $ python3
 '/home/vaibhav/path-traveler/path_traveler/sample/directory2/directory21/file211.txt'
 
 ```
+## How to use this package to travel using namedtuple() factory function 
 
-
+<img src="./gif/named_tuple_demo.gif" alt="My Project GIF">
 
 ## How to use this package in command line interface (CLI)
 

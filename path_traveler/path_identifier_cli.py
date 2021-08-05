@@ -69,59 +69,6 @@ def examples():
     print()
     print("""{}""".format("#" * 75))
 
-    root_path = './sample'
-    find = None
-    journey = travelling(root_path=root_path, find=find)
-    root_path = journey.root_path
-    current_working_directory = journey.cwd
-    print("""Input parameters:
-{}""".format("-" * 23))
-    print("root_path = {}".format(root_path))
-    print("find = {}".format(find))
-    print()
-    print("""Output:
-{}""".format("-" * 23))
-    print("Current Working Directory: {}".format(current_working_directory))
-    print()
-    absolute_paths = journey.absolute_paths
-    print("Absolute paths: {}".format(absolute_paths))
-    print()
-    relative_paths = journey.relative_paths
-    print("Relative paths: {}".format(relative_paths))
-    print()
-    traveller = journey.travel
-    print("Total files and directories available: {}".format(len(traveller)))
-    print()
-    print("""{}""".format("#" * 75))
-
-    print()
-    root_path = './sample'
-    find = 'spec.json'
-    print("Identifying '{}' file".format(find))
-    print("""{}""".format("-" * 28))
-    journey = travelling(root_path=root_path, find=find)
-    root_path = journey.root_path
-    current_working_directory = journey.cwd
-    print("""Input parameters:
-{}""".format("-" * 23))
-    print("root_path = {}".format(root_path))
-    print("find = {}".format(find))
-    print()
-    print("""Output:
-{}""".format("-" * 23))
-    print("Current Working Directory: {}".format(current_working_directory))
-    print()
-    absolute_paths = journey.absolute_paths
-    print("Absolute paths: {}".format(absolute_paths))
-    print()
-    relative_paths = journey.relative_paths
-    print("Relative paths: {}".format(relative_paths))
-    print()
-    traveller = journey.travel
-    print("Total files and directories available: {}".format(len(traveller)))
-    print()
-    print("""{}""".format("#" * 75))
-
 
 @click.command()
 @click.option('--root_path', '-P', prompt='Type . for current root directory. \
