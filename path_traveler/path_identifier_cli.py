@@ -93,7 +93,7 @@ display default examples otherwise type [Enter]',
               help="Print predefined examples")
 def main(root_path=None, find=None, show_absolute_paths=False,
          show_relative_paths=False, show_examples=False):
-    if not (pathlib.PosixPath(root_path).is_dir() or pathlib.PosixPath(root_path).is_file()):
+    if not (pathlib.Path(root_path).is_dir() or pathlib.Path(root_path).is_file()):
         click.echo("\nPlease enter the correct root path. You can use . for \
 current directory\n")
         return main()

@@ -37,7 +37,7 @@ def _walk(path: str, search_name: str = None, absolute_key: bool = False,
         list which list down all the files available in current directory and
         all subdirectories.
 
-    >>> location = pathlib.PosixPath('.')
+    >>> location = pathlib.Path('.')
 
     >>> find = None
 
@@ -61,7 +61,7 @@ def _walk(path: str, search_name: str = None, absolute_key: bool = False,
     >>> type(relative_paths)
     <class 'dict'>
     """
-    BASE_PATH = pathlib.PosixPath(path)
+    BASE_PATH = pathlib.Path(path)
     path_dict = defaultdict(list)
     path_list = []
     if BASE_PATH.is_file():
@@ -80,7 +80,7 @@ def _walk(path: str, search_name: str = None, absolute_key: bool = False,
                               absolute_value=absolute_value,
                               output_dict=output_dict)
             key = path_item.parent
-            if isinstance(file_path, pathlib.PosixPath):
+            if isinstance(file_path, pathlib.Path):
                 if absolute_value:
                     file_path = file_path.absolute().as_posix()
                 else:
@@ -155,7 +155,7 @@ def walk(path: str, search_name: str = None):
     >>> type(walking_result)
     <class 'dict'>
     """
-    BASE_PATH = pathlib.PosixPath(path)
+    BASE_PATH = pathlib.Path(path)
     path_dict = defaultdict(list)
     if BASE_PATH.is_file():
         if search_name:
@@ -172,7 +172,7 @@ def walk(path: str, search_name: str = None):
             if file_path == {}:
                 file_path = {path_item.name: []}
             parent = path_item.parent
-            if isinstance(file_path, pathlib.PosixPath):
+            if isinstance(file_path, pathlib.Path):
                 file_path = file_path.absolute().as_posix()
             path_dict[parent.absolute().name].append(file_path)
     return dict(path_dict)
@@ -207,7 +207,7 @@ def validate_identifier(identifier: str):
     >>> validate_identifier(identifier='__init__.py')
     'prefix__init___py'
     """
-    identifier = pathlib.PosixPath(identifier)
+    identifier = pathlib.Path(identifier)
     identifier = identifier.name
     identifier = identifier.replace(' ', '_')
     for symbol in punctuation:
@@ -477,20 +477,20 @@ def travelling(root_path: str = None, find: str = None):
                                travel
                                """)
     # Set appropriate path locations
-    root_path = root_path and pathlib.PosixPath(
+    root_path = root_path and pathlib.Path(
         root_path).absolute().as_posix()
 
     if root_path is None:
         try:
             location = pathlib.Path(__file__).parent
         except NameError:
-            location = pathlib.PosixPath('.')
+            location = pathlib.Path('.')
     else:
         location = pathlib.Path(root_path)
         if not location.is_dir() and location.is_file():
             location = location.parent
 
-    original_location = pathlib.PosixPath(
+    original_location = pathlib.Path(
         __file__).parent.absolute().as_posix()
 
     try:
@@ -501,7 +501,7 @@ def travelling(root_path: str = None, find: str = None):
         raise TypeError
 
     # Finding relative paths
-    location = pathlib.PosixPath('.')
+    location = pathlib.Path('.')
 
     # Finding absolute path
     absolute_paths = _walk(location.as_posix(), absolute_key=False,
