@@ -18,7 +18,7 @@ test_requirements = [
 
 setup(
     name='path_traveler',
-    version='0.0.3',
+    version='0.0.4',
     description="Travel any path and find some files.",
     long_description=readme,
     long_description_content_type='text/markdown',

@@ -207,6 +207,8 @@ def validate_identifier(identifier: str):
     >>> validate_identifier(identifier='__init__.py')
     'prefix__init___py'
     """
+    if not identifier:
+        return identifier
     identifier = pathlib.Path(identifier)
     identifier = identifier.name
     identifier = identifier.replace(' ', '_')
@@ -287,7 +289,6 @@ def dict2obj(d: dict):
                 my_file_list.append(item)
             else:
                 my_folder_list.append(item)
-
         named_tuple = FilesAndFolders(files=my_file_list,
                                       folders=my_folder_list)
         return named_tuple
@@ -296,17 +297,22 @@ def dict2obj(d: dict):
     if not isinstance(d, dict):
         return d
     # declaring a class
-
     class C:
         def __repr__(self):
             folder_or_file_name = list(
                 self.__dict__.keys()) and list(
+                self.__dict__.keys()) and list(
                 self.__dict__.keys())[0]
+            if not isinstance(folder_or_file_name, str):
+                folder_or_file_name = ''
             folder_or_file_name = validate_identifier(
                 identifier=folder_or_file_name)
             return folder_or_file_name
     # constructor of the class passed to obj
     obj = C()
+    if not d:
+        obj.__dict__['object'] = dict2obj([])
+        return obj
     for k in d:
         v = dict2obj(d[k])
         k = validate_identifier(identifier=k)
