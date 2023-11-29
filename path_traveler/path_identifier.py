@@ -486,21 +486,23 @@ def travelling(root_path: str = None, find: str = None):
     root_path = root_path and pathlib.Path(
         root_path).absolute().as_posix()
 
-    if root_path is None:
+    if not root_path:
         try:
             location = pathlib.Path(__file__).parent
         except NameError:
-            location = pathlib.Path('.')
+            location = pathlib.Path('./path_identifier.py').parent
     else:
         location = pathlib.Path(root_path)
         if not location.is_dir() and location.is_file():
             location = location.parent
-
-    original_location = pathlib.Path(
-        __file__).parent.absolute().as_posix()
-
     try:
-        pathlib.os.chdir(location)
+        original_location = pathlib.Path(
+            '.').absolute().as_posix()
+    except NameError:
+        original_location = pathlib.Path(
+            './path_identifier.py').parent.absolute().as_posix()
+    try:
+        pathlib.os.chdir(location.absolute().as_posix())
     except FileNotFoundError:
         raise FileNotFoundError
     except TypeError:
@@ -510,18 +512,18 @@ def travelling(root_path: str = None, find: str = None):
     location = pathlib.Path('.')
 
     # Finding absolute path
-    absolute_paths = _walk(location.as_posix(), absolute_key=False,
+    absolute_paths = _walk(location.absolute().as_posix(), absolute_key=False,
                            absolute_value=True, search_name=find,
                            output_dict=False)
     absolute_paths = find_available_path(from_list=absolute_paths)
 
-    relative_paths = _walk(location.as_posix(), absolute_key=False,
+    relative_paths = _walk(location.absolute().as_posix(), absolute_key=False,
                            absolute_value=False, search_name=find,
                            output_dict=False)
     relative_paths = find_available_path(from_list=relative_paths)
 
     # Travel to every path and create dictionary
-    my_dict = walk(location.as_posix())
+    my_dict = walk(location.absolute().as_posix())
 
     # Convert dictionary to object
     obj = dict2obj(my_dict)
