@@ -512,12 +512,12 @@ def travelling(root_path: str = None, find: str = None):
     location = pathlib.Path('.')
 
     # Finding absolute path
-    absolute_paths = _walk(location.absolute().as_posix(), absolute_key=False,
+    absolute_paths = _walk(location.as_posix(), absolute_key=False,
                            absolute_value=True, search_name=find,
                            output_dict=False)
     absolute_paths = find_available_path(from_list=absolute_paths)
 
-    relative_paths = _walk(location.absolute().as_posix(), absolute_key=False,
+    relative_paths = _walk(location.as_posix(), absolute_key=False,
                            absolute_value=False, search_name=find,
                            output_dict=False)
     relative_paths = find_available_path(from_list=relative_paths)
